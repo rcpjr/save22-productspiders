@@ -11,6 +11,6 @@ class Allforyousgcrawler(scrapy.Spider):
 
     def parse(self, response):
         for parse in response.xpath('//*[@id="pagemaincontent"]/div[1]/div[2]/div/div/div/div/div[2]/a/@href').extract():
-          print parse  
+            print response.urljoin(parse)  
 
         
