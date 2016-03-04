@@ -11,6 +11,10 @@ class Allforyousgcrawler(scrapy.Spider):
 
     def parse(self, response):
         for parse in response.xpath('//*[@id="pagemaincontent"]/div[1]/div[2]/div/div/div/div/div[2]/a/@href').extract():
-            print response.urljoin(parse)  
+            yield scrapy.Request(response.urljoin(parse), callback=self.parse_dir_contents)
+            #print response.urljoin(parse) 
+            #printing of main page link
 
-        
+    def parse_dir_contents(self, response):
+        for contents in response.xpath('//*[@id="pagemaincontent"]/div[1]/div[2]/div/div/h2/a/@href').extract():
+            print response.urljoin(contents)
