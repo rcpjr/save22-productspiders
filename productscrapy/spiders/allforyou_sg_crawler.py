@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 
+from productscrapy.items import ProductscrapyItem
 
 class Allforyousgcrawler(scrapy.Spider):
     name = "allforyou_sg_crawler"
@@ -21,15 +22,17 @@ class Allforyousgcrawler(scrapy.Spider):
             yield scrapy.Request(response.urljoin(contents), callback=self.details)
 
     def details(self, response):
+        item = ProductscrapyItem
         for details in response.xpath('//div[@class="prod-data"]/@id').extract():
-            print response.xpath('//div[@id="'+details+'"]/@data-name').extract()[0]
-            print response.xpath('//div[@id="'+details+'"]/@data-desc').extract()[0]
-            print response.xpath('//div[@id="'+details+'"]/@data-newprodid').extract()[0]
-            print response.xpath('//div[@id="'+details+'"]/@data-tah').extract()[0]
-            print response.xpath('//div[@id="'+details+'"]/@data-imgurl').extract()[0]
-            print response.xpath('//div[@id="'+details+'"]/@data-selqty').extract()[0]
-            print response.xpath('//div[@id="'+details+'"]/@data-price').extract()[0]
-            print response.xpath('//div[@id="'+details+'"]/@data-oldprice').extract()[0]
-            print response.xpath('//div[@id="'+details+'"]/@data-add2cart').extract()[0]
-            print response.xpath('//div[@id="'+details+'"]/@data-add2list').extract()[0]
-            print response.xpath('//div[@id="'+details+'"]/@data-outofstack').extract()
+            item ['name'] = response.xpath('//div[@id="'+details+'"]/@data-name').extract()[0]
+            item ['desc'] = response.xpath('//div[@id="'+details+'"]/@data-desc').extract()[0]
+            item ['newprodid'] = response.xpath('//div[@id="'+details+'"]/@data-newprodid').extract()[0]
+            item ['tah'] = response.xpath('//div[@id="'+details+'"]/@data-tah').extract()[0]
+            item ['imgurl'] = response.xpath('//div[@id="'+details+'"]/@data-imgurl').extract()[0]
+            item ['selqty'] = response.xpath('//div[@id="'+details+'"]/@data-selqty').extract()[0]
+            item ['price'] = response.xpath('//div[@id="'+details+'"]/@data-price').extract()[0]
+            item ['oldprice'] = response.xpath('//div[@id="'+details+'"]/@data-oldprice').extract()[0]
+            item ['add2cart'] = response.xpath('//div[@id="'+details+'"]/@data-add2cart').extract()[0]
+            item ['add2list'] = response.xpath('//div[@id="'+details+'"]/@data-add2list').extract()[0]
+            item ['outofstack'] = response.xpath('//div[@id="'+details+'"]/@data-outofstack').extract()
+            yield item

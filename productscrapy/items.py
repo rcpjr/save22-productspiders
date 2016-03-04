@@ -10,6 +10,7 @@ import scrapy
 
 class ProductscrapyItem(scrapy.Item):
     url = scrapy.Field()
+    name = scrapy.Field()
     title = scrapy.Field()
     description = scrapy.Field()
     retailer_sku_code = scrapy.Field()
