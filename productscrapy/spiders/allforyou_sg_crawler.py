@@ -22,7 +22,7 @@ class Allforyousgcrawler(scrapy.Spider):
             yield scrapy.Request(response.urljoin(contents), callback=self.details)
 
     def details(self, response):
-        item = ProductscrapyItem
+        item = ProductscrapyItem()
         for details in response.xpath('//div[@class="prod-data"]/@id').extract():
             item ['name'] = response.xpath('//div[@id="'+details+'"]/@data-name').extract()[0]
             item ['desc'] = response.xpath('//div[@id="'+details+'"]/@data-desc').extract()[0]
