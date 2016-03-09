@@ -33,18 +33,15 @@ class ProductscrapyItem(scrapy.Item):
     #features = scrapy.Field()
     #rating = scrapy.Field()
     
-
-    #instock = scrapy.Field()
     #used items
-    name = scrapy.Field()
-    desc = scrapy.Field()
-    newprodid = scrapy.Field()
-    tah = scrapy.Field()
-    imgurl = scrapy.Field()
-    selqty = scrapy.Field()
-    price = scrapy.Field()
-    oldprice = scrapy.Field()
-    add2cart = scrapy.Field()
-    add2list = scrapy.Field()
-    outofstack = scrapy.Field()
+    title = scrapy.Field()               #name
+    description = scrapy.Field()         #desc
+    retailer_sku_code = scrapy.Field()   #data_newprodid
+    url = scrapy.Field()                 #imgurl
+    #promo_qty = scrapy.Field()           #selqty
+    promo_data = scrapy.Field()          #data-offername
+    #promo_price = scrapy.Field()         # 
+    current_price = scrapy.Field()       #data-price
+    price = scrapy.Field()               #data-price
+    instock = scrapy.Field()             #outofstock
     
