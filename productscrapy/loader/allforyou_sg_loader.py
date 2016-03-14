@@ -1,5 +1,11 @@
 from scrapy.loader import ItemLoader
-from scrapy.loader.processors import TakeFirst, MapCompose, Join
+from scrapy.loader.processors import TakeFirst, MapCompose, Join, Compose
+
+
+def get_price(price):
+    price = price.strip('$')
+    price = float(price)
+    return price
 
 class AllforyouSgLoader(ItemLoader):
    
@@ -21,8 +27,8 @@ class AllforyouSgLoader(ItemLoader):
     #selqty_in = MapCompose(unicode.strip)
     #selqty_out = Join()
 
-    price_in = MapCompose(unicode.strip)
-    price_out = Join()
+    price_in = MapCompose(unicode.strip, get_price)
+    price_out = Compose()
 
     current_price_in = MapCompose(unicode.strip)
     current_price_out = Join()
